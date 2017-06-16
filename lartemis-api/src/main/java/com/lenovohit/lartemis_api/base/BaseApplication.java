@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.lenovohit.lartemis_api.inject.component.AppComponent;
 import com.lenovohit.lartemis_api.inject.component.DaggerAppComponent;
+import com.lenovohit.lartemis_api.inject.module.ApiServiceModule;
 import com.lenovohit.lartemis_api.inject.module.AppModule;
 import com.lenovohit.lartemis_api.ui.controller.MainController;
 
@@ -34,6 +35,7 @@ public class BaseApplication extends Application{
     private void setupGraph() {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
+                .apiServiceModule(new ApiServiceModule())
                 .build();
         appComponent.inject(this);
     }
