@@ -1,25 +1,16 @@
 package com.lenovohit.lartemis_api.base;
 
 import com.google.common.base.Preconditions;
-import com.lenovohit.lartemis_api.inject.component.AppComponent;
-import com.lenovohit.lartemis_api.inject.component.DaggerAppComponent;
-import com.lenovohit.lartemis_api.inject.module.ApiServiceModule;
-import com.lenovohit.lartemis_api.network.ApiService;
 import com.lenovohit.lartemis_api.utils.ResponseError;
 
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-
-import javax.inject.Inject;
 /**
  * p层父类
  * Created by yuzhijun on 2017/6/15.
  */
 public abstract class BaseController<U extends BaseController.Ui<UC>, UC> {
-    @Inject
-    public ApiService apiService;
-    private AppComponent appComponent;
 
     private final Set<U> mUis;
     private final Set<U> mUnmodifiableUis;
@@ -31,11 +22,6 @@ public abstract class BaseController<U extends BaseController.Ui<UC>, UC> {
         mUis = new CopyOnWriteArraySet<>();
         mUnmodifiableUis = Collections.unmodifiableSet(mUis);
 
-        //依赖注入
-        appComponent = DaggerAppComponent.builder()
-                .apiServiceModule(new ApiServiceModule())
-                .build();
-        appComponent.inject(this);
     }
 
     public final void init() {
