@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lenovohit.lartemis_api.core.LArtemis;
 import com.lenovohit.lartemis_api.ui.controller.MainController;
 import com.lenovohit.lartemis_api.utils.ActivityStack;
 import com.lenovohit.lartemis_api.utils.ResponseError;
@@ -21,7 +22,7 @@ public abstract class BaseActivity<UC> extends AppCompatActivity implements Base
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
-        mMainController = BaseApplication.getBaseApplication().getMainController();
+        mMainController = LArtemis.getInstance().getMainController();
         getController().attachUi(this);
         ActivityStack.create().add(this);
     }
