@@ -1,11 +1,12 @@
 package com.lenovohit.lartemis_api.base;
 
 import com.google.common.base.Preconditions;
-import com.lenovohit.lartemis_api.utils.ResponseError;
+import com.lenovohit.lartemis_api.model.ResponseError;
 
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+
 /**
  * p层父类
  * Created by yuzhijun on 2017/6/15.

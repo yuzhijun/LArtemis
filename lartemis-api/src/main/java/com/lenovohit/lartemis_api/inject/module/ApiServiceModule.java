@@ -2,7 +2,9 @@ package com.lenovohit.lartemis_api.inject.module;
 
 import com.lenovohit.lartemis_api.inject.StringConverterFactory;
 import com.lenovohit.lartemis_api.network.ApiService;
+import com.lenovohit.lartemis_api.network.ResponseErrorProxy;
 
+import java.lang.reflect.Proxy;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -16,6 +18,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * 网络相关module
  * Created by yuzhijun on 2016/4/28.
  */
 @Module
@@ -54,6 +57,11 @@ public class ApiServiceModule {
     @Provides
     @Singleton
     ApiService provideApiService(Retrofit retrofit){
-        return retrofit.create(ApiService.class);
+        return getByProxy(ApiService.class,retrofit);
+    }
+
+    ApiService getByProxy(Class<? extends ApiService> apiService,Retrofit retrofit){
+        ApiService api = retrofit.create(apiService);
+        return (ApiService) Proxy.newProxyInstance(apiService.getClassLoader(),new Class<?>[] { apiService },new ResponseErrorProxy(api));
     }
 }

@@ -44,11 +44,14 @@ public class LArtemis {
         setupGraph();
     }
 
-
     private void setupGraph() {
         appComponent = DaggerAppComponent.builder()
                 .apiServiceModule(new ApiServiceModule())
                 .build();
         appComponent.inject(this);
+    }
+
+    public Application getApplication() {
+        return mApplication;
     }
 }

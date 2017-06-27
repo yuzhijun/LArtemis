@@ -5,9 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.lenovohit.lartemis_api.core.LArtemis;
+import com.lenovohit.lartemis_api.model.ResponseError;
 import com.lenovohit.lartemis_api.ui.controller.MainController;
 import com.lenovohit.lartemis_api.utils.ActivityStack;
-import com.lenovohit.lartemis_api.utils.ResponseError;
 
 /**
  *  activity基类

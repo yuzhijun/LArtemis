@@ -3,12 +3,13 @@ package com.lenovohit.lartemis_api.ui.controller;
 import com.google.common.base.Preconditions;
 import com.lenovohit.lartemis_api.base.BaseController;
 import com.lenovohit.lartemis_api.model.HttpResult;
+import com.lenovohit.lartemis_api.model.ResponseError;
 import com.lenovohit.lartemis_api.model.Weather;
 import com.lenovohit.lartemis_api.network.ApiService;
+import com.lenovohit.lartemis_api.network.RequestCallBack;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -51,22 +52,17 @@ public class MainController extends BaseController<MainController.MainUi,MainCon
                 mApiService.getWeatherResult(IP)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<HttpResult<Weather>>() {
-                    @Override
-                    public void onCompleted() {
+                        .subscribe(new RequestCallBack<HttpResult<Weather>>() {
+                            @Override
+                            public void onResponse(HttpResult<Weather> response) {
+                               ui.showToast();
+                            }
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(HttpResult<Weather> weatherHttpResult) {
-                        ui.showToast();
-                    }
-                });
+                            @Override
+                            public void onFailure(ResponseError error) {
+                                ui.onResponseError(error);
+                            }
+                        });
             }
         };
     }

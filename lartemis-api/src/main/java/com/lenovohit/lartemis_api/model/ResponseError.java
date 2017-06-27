@@ -1,4 +1,4 @@
-package com.lenovohit.lartemis_api.utils;
+package com.lenovohit.lartemis_api.model;
 
 public class ResponseError extends RuntimeException {
 
