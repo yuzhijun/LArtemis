@@ -1,7 +1,7 @@
 # LArtemis
 ![Logo](https://github.com/yuzhijun/LArtemis/blob/master/app/src/main/logo/main_logo.png)
 ```
-p层利用率更高的mvp架构
+p层利用率更高的mvp架构（网络框架使用retrofit,依赖注入使用dagger 2，还集成了rxjava）
 ```
 ---
 
@@ -33,7 +33,7 @@ public class MainApplication extends Application {
 ```
 <application
       ...
-      android:name=".CustomApplication"
+      android:name=".MainApplication"
       ...
       >
       ...
@@ -145,7 +145,7 @@ public class MainActivity extends CoreActivity<MainController.MainUiCallbacks> i
 public class MainFragment extends BaseFragment<MainController.MainUiCallbacks> implements MainController.MainUi{
 }
 ```
-如果有参数则在如果方法中获取
+如果有参数则在如下方法中获取
 ```
   @Override
     protected void handleArguments(Bundle arguments) {
